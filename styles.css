@@ -1,0 +1,522 @@
+/* ===== 1. Colors & fonts (edit these to re-theme the site) ===== */
+:root {
+    --bg: #FFEC9F;
+    /* butter yellow */
+    --dots: #F3D263;
+    /* pixel dot pattern */
+    --card: #FFFDF4;
+    /* cream paper */
+    --gold: #F4C95D;
+    --gold-text: #D8951F;
+    --brown: #4A3524;
+    --button: #FFE066;
+    --pink: #FF8FA3;
+    --red: #E5484D;
+    --pixel-font: "Pixelify Sans", "Courier New", monospace;
+    --body-font: "Nunito", system-ui, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--brown);
+    font-family: var(--body-font);
+    font-weight: 700;
+    background-color: var(--bg);
+    background-image: radial-gradient(var(--dots) 1.5px, transparent 1.5px);
+    background-size: 18px 18px;
+    overflow-x: hidden;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.site-title {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 14px 8px 0;
+    font-family: var(--pixel-font);
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: .06em;
+}
+
+main {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: grid;
+    place-items: center;
+    padding: 24px 16px;
+}
+
+/* ===== 2. Screens: one visible at a time ===== */
+.screen {
+    display: none;
+    width: 100%;
+    justify-content: center;
+}
+
+.screen.is-active {
+    display: flex;
+    animation: screen-in .5s ease both;
+}
+
+@keyframes screen-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ===== 3. Cards, text, buttons (same look as the flashcard site) ===== */
+.card {
+    width: min(640px, 100%);
+    background: var(--card);
+    border: 4px solid var(--brown);
+    box-shadow: 6px 6px 0 var(--gold);
+    padding: 28px 22px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+}
+
+.stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.label {
+    margin: 0;
+    font-family: var(--pixel-font);
+    font-size: .85rem;
+    opacity: .75;
+}
+
+.title {
+    margin: 0;
+    font-family: var(--pixel-font);
+    font-weight: 700;
+    font-size: clamp(2.4rem, 9vw, 3.8rem);
+    line-height: 1.1;
+}
+
+.title--md {
+    font-size: clamp(1.6rem, 6vw, 2.4rem);
+}
+
+.subtitle {
+    margin: 0;
+    font-family: var(--pixel-font);
+    font-weight: 700;
+    color: var(--gold-text);
+    font-size: clamp(1.15rem, 4.8vw, 1.8rem);
+}
+
+.text {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 46ch;
+}
+
+.hint {
+    margin: 0;
+    font-size: .9rem;
+    opacity: .75;
+    animation: blink 2.4s ease-in-out infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: .35;
+    }
+}
+
+.btn {
+    font-family: var(--pixel-font);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--brown);
+    background: var(--button);
+    padding: 14px 26px;
+    cursor: pointer;
+    border: 4px solid var(--brown);
+    box-shadow: 0 5px 0 var(--gold-text);
+    transition: transform .1s, box-shadow .1s, background .1s;
+}
+
+.btn:hover {
+    background: #FFF08A;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 var(--gold-text);
+}
+
+.btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 var(--gold-text);
+}
+
+.btn:disabled {
+    opacity: .6;
+    cursor: default;
+    transform: none;
+}
+
+.btn--small {
+    font-size: .95rem;
+    padding: 8px 16px;
+    background: var(--card);
+}
+
+.btn--pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.btn:focus-visible,
+.envelope:focus-visible {
+    outline: 4px dashed var(--red);
+    outline-offset: 5px;
+}
+
+/* ===== 4. Envelope (built from CSS shapes) ===== */
+.envelope {
+    --w: min(230px, 62vw);
+    position: relative;
+    width: var(--w);
+    height: calc(var(--w) * .68);
+    margin: 26px 0 4px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    perspective: 800px;
+    animation: float 3.2s ease-in-out infinite;
+}
+
+@keyframes float {
+    50% {
+        transform: translateY(-9px);
+    }
+}
+
+.envelope__glow {
+    position: absolute;
+    inset: -28px;
+    z-index: 0;
+    background: radial-gradient(circle, rgba(255, 236, 159, .95) 0%, transparent 65%);
+    animation: glow 2.8s ease-in-out infinite;
+}
+
+@keyframes glow {
+    50% {
+        opacity: .4;
+        transform: scale(1.08);
+    }
+}
+
+.envelope__body {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background-color: #FFF3C4;
+    border: 4px solid var(--brown);
+    box-shadow: 5px 5px 0 var(--gold);
+    background-image:
+        linear-gradient(to top right, transparent 49%, var(--gold) 49%, var(--gold) 51%, transparent 51%),
+        linear-gradient(to top left, transparent 49%, var(--gold) 49%, var(--gold) 51%, transparent 51%);
+    background-size: 50% 62%;
+    background-position: left bottom, right bottom;
+    background-repeat: no-repeat;
+}
+
+.envelope__flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 62%;
+    z-index: 4;
+    background: var(--gold);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top;
+    transition: transform .7s ease, z-index 0s .35s;
+}
+
+.envelope__seal {
+    position: absolute;
+    left: 50%;
+    top: 52%;
+    z-index: 5;
+    transform: translate(-50%, -50%);
+    font-size: 1.7rem;
+    line-height: 1;
+    color: var(--red);
+    text-shadow: 2px 2px 0 var(--brown);
+    transition: opacity .3s;
+}
+
+.envelope__letter {
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    top: 8%;
+    bottom: 8%;
+    z-index: 1;
+    background: #fff;
+    border: 3px solid var(--brown);
+    padding: 12px 10px;
+    transition: transform .9s ease .5s;
+}
+
+.envelope__lines {
+    display: block;
+    height: 100%;
+    background: repeating-linear-gradient(transparent 0 8px, var(--bg) 8px 12px);
+}
+
+.envelope:hover .envelope__flap {
+    transform: rotateX(18deg);
+}
+
+/* Added by script.js when opening */
+.envelope.is-open {
+    animation: none;
+    cursor: default;
+}
+
+.envelope.is-open .envelope__flap {
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+
+.envelope.is-open .envelope__seal {
+    opacity: 0;
+}
+
+.envelope.is-open .envelope__letter {
+    transform: translateY(-55%);
+    z-index: 3;
+}
+
+/* ===== 5. Letter + question ===== */
+.card--letter {
+    gap: 16px;
+}
+
+.letter__text {
+    margin: 0;
+    width: 100%;
+    text-align: left;
+    white-space: pre-wrap;
+    font-size: 1.1rem;
+    line-height: 1.85;
+}
+
+.ghost {
+    color: transparent;
+}
+
+/* the not-yet-typed part keeps the card from jumping in height */
+.choices {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: min(420px, 100%);
+    margin-top: 6px;
+}
+
+.choices .btn {
+    font-size: 1.05rem;
+}
+
+/* ===== 6. Pixel decorations ===== */
+.pixel svg {
+    display: block;
+}
+
+.sky {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.sky .pixel {
+    position: absolute;
+}
+
+.sun {
+    top: 40px;
+    left: 28px;
+}
+
+.c1 {
+    top: 70px;
+    right: 6%;
+    animation: bob 7s ease-in-out infinite;
+}
+
+.c2 {
+    top: 32%;
+    left: 22%;
+    animation: bob 9s ease-in-out infinite reverse;
+}
+
+@keyframes bob {
+    50% {
+        transform: translateX(18px);
+    }
+}
+
+.s1 {
+    top: 22%;
+    left: 12%;
+}
+
+.s2 {
+    top: 48%;
+    left: 4%;
+}
+
+.s3 {
+    top: 26%;
+    right: 18%;
+}
+
+.s4 {
+    top: 56%;
+    right: 6%;
+}
+
+.spark {
+    animation: twinkle 3s ease-in-out infinite;
+}
+
+.s2 {
+    animation-delay: .7s;
+}
+
+.s3 {
+    animation-delay: 1.4s;
+}
+
+.s4 {
+    animation-delay: 2s;
+}
+
+@keyframes twinkle {
+    50% {
+        transform: scale(.6);
+        opacity: .5;
+    }
+}
+
+.doodles {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 28px;
+    padding: 0 12px 10px;
+}
+
+.ground {
+    position: relative;
+    z-index: 2;
+    height: 48px;
+    border-top: 4px solid var(--brown);
+    background: conic-gradient(#DDAE62 25%, #EDC98B 0 50%, #DDAE62 0 75%, #EDC98B 0);
+    background-size: 96px 96px;
+}
+
+.hearts-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.float-heart {
+    position: absolute;
+    bottom: -40px;
+    color: var(--pink);
+    text-shadow: 2px 2px 0 var(--red);
+    animation: rise 2.8s ease-in forwards;
+}
+
+@keyframes rise {
+    to {
+        transform: translateY(-110vh) rotate(15deg);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 640px) {
+    .sun {
+        transform: scale(.55);
+        transform-origin: top left;
+        top: 52px;
+        left: 8px;
+    }
+
+    .doodles {
+        transform: scale(.65);
+        transform-origin: bottom center;
+        gap: 16px;
+        margin-top: -40px;
+    }
+
+    .c2,
+    .s2 {
+        display: none;
+    }
+}
+
+/* ===== 7. Respect reduced-motion settings ===== */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition-duration: .01ms !important;
+        transition-delay: 0s !important;
+    }
+}

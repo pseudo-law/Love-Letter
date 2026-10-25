@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>A Little Letter for You 💛</title>
+    <!-- Pixel font for headings/buttons, readable font for the letter. Falls back to system fonts offline. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&family=Nunito:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Pixel-art decorations. script.js draws each one from the ART grids (data-art = name, data-size = pixel size). -->
+    <div class="sky" aria-hidden="true">
+        <span class="pixel sun" data-art="sun" data-size="9"></span>
+        <span class="pixel cloud c1" data-art="cloud" data-size="7"></span>
+        <span class="pixel cloud c2" data-art="cloud" data-size="5"></span>
+        <span class="pixel spark s1" data-art="sparkle" data-size="5"></span>
+        <span class="pixel spark s2" data-art="sparkle" data-size="4"></span>
+        <span class="pixel spark s3" data-art="sparkle" data-size="6"></span>
+        <span class="pixel spark s4" data-art="sparkle" data-size="3"></span>
+    </div>
+    <div class="hearts-layer" id="hearts-layer" aria-hidden="true"></div>
+
+    <header class="site-title">✱ a little letter for you</header>
+
+    <main>
+        <!-- SCREEN 1: Welcome -->
+        <section class="screen is-active" data-screen="welcome">
+            <div class="card">
+                <p class="label">~ Welcome ~</p>
+                <h1 class="title">Hi, babi!</h1>
+                <p class="subtitle">I made a little something...</p>
+                <p class="text">I love you babi<3 </p>
+
+                        <!-- The envelope is a real <button>, so it works with keyboard too -->
+                        <button class="envelope" id="envelope" type="button" aria-label="Open the envelope">
+                            <span class="envelope__glow"></span>
+                            <span class="envelope__letter"><span class="envelope__lines"></span></span>
+                            <span class="envelope__body"></span>
+                            <span class="envelope__flap"></span>
+                            <span class="envelope__seal">♥</span>
+                        </button>
+                        <p class="hint">Bab, click the envelope</p>
+
+                        <button class="btn btn--pulse" id="open-btn" type="button">Open your letter ♥</button>
+            </div>
+        </section>
+
+        <!-- SCREEN 2: The letter (text comes from LETTER_TEXT in script.js) -->
+        <section class="screen" data-screen="letter">
+            <div class="card card--letter">
+                <p class="label">~ for you ~</p>
+                <!-- Screen readers get the full text at once; the typed copy is just the visual effect -->
+                <p class="sr-only" id="letter-sr"></p>
+                <p class="letter__text" aria-hidden="true"><span id="letter-typed"></span><span class="ghost"
+                        id="letter-ghost"></span></p>
+                <button class="btn btn--small" id="skip-btn" type="button">Show all the text</button>
+                <button class="btn" id="continue-btn" type="button" hidden>Continue ♥</button>
+            </div>
+        </section>
+
+        <!-- SCREEN 3: The question, then the reaction to the chosen answer -->
+        <section class="screen" data-screen="question">
+            <div class="card">
+                <div id="question-block" class="stack">
+                    <p class="label">~ one more thing ~</p>
+                    <h2 class="title title--md">So... what do you think?</h2>
+                    <p class="text">There's no wrong answer. Be honest with me.</p>
+                    <div class="choices" id="choices"></div>
+                </div>
+                <div id="reaction-block" class="stack" hidden>
+                    <h2 class="title title--md" id="reaction-title"></h2>
+                    <p class="text" id="reaction-text"></p>
+                    <button class="btn" id="replay-btn" type="button">Read it again ↺</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pixel doodle row -->
+    <div class="doodles" aria-hidden="true">
+        <span class="pixel" data-art="books" data-size="7"></span>
+        <span class="pixel" data-art="cat" data-size="7"></span>
+        <span class="pixel" data-art="heart" data-size="7"></span>
+        <span class="pixel" data-art="flower" data-size="6"></span>
+        <span class="pixel" data-art="flower" data-size="6"></span>
+    </div>
+    <div class="ground" aria-hidden="true"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
