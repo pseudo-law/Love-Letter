@@ -22,7 +22,7 @@ Cunton 💛`;
 // The three answer buttons and the reaction each one shows. Keep them kind and pressure-free.
 const RESPONSES = [
     {
-        label: "I feel the same way 💛", title: "You just made my whole day 💛",
+        label: "I love you too, babi:))💛", title: "You just made my whole day 💛",
         text: "I'm smiling so much right now. I love you, babi! Let's spend our future together - babi's side.", hearts: 28
     },
     {
