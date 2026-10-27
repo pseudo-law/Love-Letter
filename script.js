@@ -14,7 +14,7 @@ I just wanted to be honest about how I feel, because you mean that much to me.
 
 So, with all the courage I can gather, I want to ask you something I've been wanting to ask for a while now...
 
-Will you be my boyfriend? 💛
+Can I be your boyfriend? 💛
 
 With all my heart,
 Cunton 💛`;
